@@ -2,6 +2,8 @@ package com.basetwelve.Handlers;
 
 import com.basetwelve.MainClass;
 import com.basetwelve.state.MainMenu;
+import com.basetwelve.state.PlayAttack;
+import com.basetwelve.state.PlayDodge;
 import com.basetwelve.state.State;
 
 import java.util.Stack;
@@ -17,6 +19,8 @@ public class StateManager {
     private Stack<State> stateStack;
 
     public static final int MAIN_MENU = 0;
+    public static final int PLAY_DODGE = 1;
+    public static final int PLAY_ATTACK = 2;
 
     //constructor
     public StateManager(MainClass game) {
@@ -24,7 +28,7 @@ public class StateManager {
         stateStack = new Stack<State>();
 
         //start with the main menu
-        pushState(MAIN_MENU);
+        pushState(PLAY_ATTACK);
     }
 
     //returns the current applicaiton listener
@@ -44,8 +48,14 @@ public class StateManager {
     }
 
     private State getState(int state) {
+
+        //find the state to get
         if(state == MAIN_MENU) {
             return new MainMenu(this);
+        } else if(state == PLAY_DODGE) {
+            return new PlayDodge(this);
+        } else if(state == PLAY_ATTACK) {
+            return new PlayAttack(this);
         }
 
         return null;

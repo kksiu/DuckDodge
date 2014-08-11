@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.basetwelve.Handlers.StateManager;
+import com.basetwelve.Handlers.TextureHandler;
 
 public class MainClass extends ApplicationAdapter {
 
@@ -18,10 +19,16 @@ public class MainClass extends ApplicationAdapter {
 
     //the state manager to handle all the different states
     StateManager stateManager;
+    TextureHandler textureHandler;
 
 	@Override
 	public void create () {
+        //create the handlers
         stateManager = new StateManager(this);
+        textureHandler = new TextureHandler();
+
+        //load all the textures
+        loadTextures();
 	}
 
 	@Override
@@ -31,14 +38,23 @@ public class MainClass extends ApplicationAdapter {
 
         //update the time
         stateManager.update(dt);
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        //render what is currently in the stage manager
         stateManager.render();
 	}
 
     @Override
     public void dispose() {
 
+    }
+
+    public TextureHandler getTextureHandler() {
+        return textureHandler;
+    }
+
+    private void loadTextures() {
+        textureHandler.loadTexture("images/duck_stock.png", "Duck");
     }
 }
