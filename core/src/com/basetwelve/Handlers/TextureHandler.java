@@ -12,7 +12,7 @@ public class TextureHandler {
 
     private HashMap<String, Texture> textureMap;
 
-    //constructor fo rthe texture handler
+    //constructor fo the texture handler
     public TextureHandler() {
         textureMap = new HashMap<String, Texture>();
     }

@@ -24,11 +24,12 @@ public class MainClass extends ApplicationAdapter {
 	@Override
 	public void create () {
         //create the handlers
-        stateManager = new StateManager(this);
         textureHandler = new TextureHandler();
-
+        
         //load all the textures
         loadTextures();
+
+        stateManager = new StateManager(this);
 	}
 
 	@Override

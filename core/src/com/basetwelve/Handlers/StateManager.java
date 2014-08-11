@@ -25,6 +25,7 @@ public class StateManager {
     //constructor
     public StateManager(MainClass game) {
         this.game = game;
+
         stateStack = new Stack<State>();
 
         //start with the main menu
