@@ -18,14 +18,14 @@ public class MainClass extends ApplicationAdapter {
     public static final int HEIGHT = 720;
 
     //the state manager to handle all the different states
-    StateManager stateManager;
-    TextureHandler textureHandler;
+    private StateManager stateManager;
+    private TextureHandler textureHandler;
 
 	@Override
 	public void create () {
         //create the handlers
         textureHandler = new TextureHandler();
-        
+
         //load all the textures
         loadTextures();
 

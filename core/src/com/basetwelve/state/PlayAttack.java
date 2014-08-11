@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.utils.Scaling;
 import com.basetwelve.Handlers.StateManager;
 
 /**
@@ -25,8 +26,10 @@ public class PlayAttack extends State {
         //initialize the duck
         centerDuck = new Image(texReg);
 
-        //scale it to half
-        centerDuck.setScale(0.5f);
+        //resize to half
+        centerDuck.setWidth(.5f * centerDuck.getWidth());
+        centerDuck.setHeight(.5f * centerDuck.getHeight());
+        centerDuck.setScaling(Scaling.fill);
 
         //center the duck
         centerDuck.setCenterPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
