@@ -15,6 +15,9 @@ public class TextureHandler {
     //constructor fo the texture handler
     public TextureHandler() {
         textureMap = new HashMap<String, Texture>();
+
+        //load all teh default textures
+        loadTextures();
     }
 
     //load a texture based on a path and the key
@@ -35,5 +38,10 @@ public class TextureHandler {
         if(texture != null) {
             texture.dispose();
         }
+    }
+
+    private void loadTextures() {
+        loadTexture("images/duck_stock.png", "Duck");
+        loadTexture("images/player_stock.png", "Player");
     }
 }

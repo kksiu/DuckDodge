@@ -22,8 +22,6 @@ public class MainClass extends ApplicationAdapter {
         //create the handlers
         textureHandler = new TextureHandler();
 
-        //load all the textures
-        loadTextures();
 
         stateManager = new StateManager(this);
 	}
@@ -49,9 +47,5 @@ public class MainClass extends ApplicationAdapter {
 
     public TextureHandler getTextureHandler() {
         return textureHandler;
-    }
-
-    private void loadTextures() {
-        textureHandler.loadTexture("images/duck_stock.png", "Duck");
     }
 }

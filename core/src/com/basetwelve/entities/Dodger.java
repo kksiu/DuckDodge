@@ -1,7 +1,43 @@
 package com.basetwelve.entities;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+
 /**
  * Created by Kenneth on 8/11/14.
  */
-public class Dodger {
+public class Dodger extends Image {
+
+    //need a score
+    private int score;
+
+    //need health
+    private int health;
+
+    //constructor
+    public Dodger(TextureRegion region) {
+        super(region);
+
+        //start at 5 health and score of 0
+        score = 0;
+        health = 5;
+    }
+
+    //getters and setters
+    public int getScore() {
+        return score;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setScore(int nScore) {
+        score = nScore;
+    }
+
+    public void setHealth(int nHealth) {
+        health = nHealth;
+    }
+
 }

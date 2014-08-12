@@ -1,5 +1,6 @@
 package com.basetwelve.handlers;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.basetwelve.MainClass;
 import com.basetwelve.state.MainMenu;
 import com.basetwelve.state.PlayAttack;
@@ -22,14 +23,21 @@ public class StateManager {
     public static final int PLAY_DODGE = 1;
     public static final int PLAY_ATTACK = 2;
 
+    //create a sprite batch
+    SpriteBatch batch;
+
     //constructor
     public StateManager(MainClass game) {
+
+        //initialize the batch
+        batch = new SpriteBatch();
+
         this.game = game;
 
         stateStack = new Stack<State>();
 
         //start with the main menu
-        pushState(PLAY_ATTACK);
+        pushState(PLAY_DODGE);
     }
 
     //returns the current applicaiton listener
@@ -74,5 +82,9 @@ public class StateManager {
     public void popState() {
         State state = stateStack.pop();
         state.dispose();
+    }
+
+    public SpriteBatch getSpriteBatch() {
+        return batch;
     }
 }
