@@ -109,9 +109,9 @@ public class MainMenu extends State{
     public void render() {
         stage.draw();
 
-        sm.getSpriteBatch().begin();
-        font.draw(sm.getSpriteBatch(), TITLE, TITLE_WIDTH, TITLE_HEIGHT);
-        sm.getSpriteBatch().end();
+        stage.getBatch().begin();
+        font.draw(stage.getBatch(), TITLE, TITLE_WIDTH, TITLE_HEIGHT);
+        stage.getBatch().end();
     }
 
     @Override

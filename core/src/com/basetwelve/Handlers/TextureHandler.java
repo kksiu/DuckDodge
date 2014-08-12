@@ -43,5 +43,6 @@ public class TextureHandler {
     private void loadTextures() {
         loadTexture("images/duck_stock.png", "Duck");
         loadTexture("images/player_stock.png", "Player");
+        loadTexture("images/circle_control.png", "CircleControl");
     }
 }
