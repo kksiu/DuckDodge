@@ -1,8 +1,7 @@
 package com.basetwelve.state;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.basetwelve.Handlers.StateManager;
+import com.basetwelve.handlers.StateManager;
 import com.basetwelve.MainClass;
 
 /**

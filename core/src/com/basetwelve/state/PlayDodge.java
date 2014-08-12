@@ -1,6 +1,6 @@
 package com.basetwelve.state;
 
-import com.basetwelve.Handlers.StateManager;
+import com.basetwelve.handlers.StateManager;
 
 /**
  * Created by Kenneth on 8/11/14.

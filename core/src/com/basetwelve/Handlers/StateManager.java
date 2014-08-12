@@ -1,4 +1,4 @@
-package com.basetwelve.Handlers;
+package com.basetwelve.handlers;
 
 import com.basetwelve.MainClass;
 import com.basetwelve.state.MainMenu;

@@ -1,4 +1,4 @@
-package com.basetwelve.Handlers;
+package com.basetwelve.handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

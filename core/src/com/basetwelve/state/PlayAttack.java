@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Scaling;
-import com.basetwelve.Handlers.StateManager;
+import com.basetwelve.handlers.StateManager;
 
 import java.util.Random;
 
@@ -62,8 +62,6 @@ public class PlayAttack extends State {
                 //figure out the screen corner angles
                 float sAngle = (float) Math.toDegrees(Math.atan2(Gdx.graphics.getHeight() / 2, Gdx.graphics.getWidth() / 2));
                 float bAngle = (float) Math.toDegrees(Math.atan2(Gdx.graphics.getHeight() / 2, -Gdx.graphics.getWidth() / 2));
-
-                System.out.println(sAngle + " " + bAngle);
 
                 //figure out the angles to move the duck
                 if((Math.abs(angle) < sAngle) || (Math.abs(angle) > bAngle)) {
