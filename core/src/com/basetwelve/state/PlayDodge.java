@@ -63,7 +63,7 @@ public class PlayDodge extends State {
         //set in center
         playerDodge.setCenterPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 
-        
+
         //add circle control
         controlMove = new CircleControl(game.getTextureHandler().getTexture("CircleControl"), circlePadding);
         controlMove.setPosition(circlePadding, circlePadding);
@@ -190,4 +190,6 @@ public class PlayDodge extends State {
         return (float) Math.sqrt(Math.pow(event.getStageY() - (control.getY() + (control.getHeight() / 2)), 2) +
         Math.pow(event.getStageX() - (control.getX()  + (control.getWidth() / 2)), 2));
     }
+
+    
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Scaling;
+import com.basetwelve.entities.Duck;
 import com.basetwelve.handlers.StateManager;
 
 import java.util.Random;
@@ -18,25 +19,13 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 //class where one can fling the duck
 public class PlayAttack extends State {
-    Image centerDuck;
+    Duck centerDuck;
 
     public PlayAttack(StateManager sm) {
         super(sm);
 
-        //use texture region to create the duck actor
-        TextureRegion texReg = new TextureRegion(game.getTextureHandler().getTexture("Duck"), 256, 256);
-
         //initialize the duck
-        centerDuck = new Image(texReg);
-
-        //resize to half
-        centerDuck.setWidth(.5f * centerDuck.getWidth());
-        centerDuck.setHeight(.5f * centerDuck.getHeight());
-        centerDuck.setScaling(Scaling.fill);
-
-        //set rotation origin to be in the center
-        centerDuck.setOrigin((centerDuck.getWidth() / 2),
-                (centerDuck.getHeight() / 2));
+        centerDuck = new Duck(game);
 
         //center the duck
         centerDuck.setCenterPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
@@ -94,7 +83,6 @@ public class PlayAttack extends State {
         stage.addActor(centerDuck);
 
         Gdx.input.setInputProcessor(stage);
-
 
     }
 
