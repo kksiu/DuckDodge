@@ -2,6 +2,7 @@ package com.basetwelve.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Scaling;
 import com.basetwelve.MainClass;
@@ -13,11 +14,11 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.parallel;
 /**
  * Created by Kenneth on 8/12/14.
  */
-public class Duck extends Image {
+public class Duck extends Box2DActor {
     private float scale;
 
-    public Duck(MainClass game) {
-        super(new TextureRegion(game.getTextureHandler().getTexture("Duck"), 256, 256));
+    public Duck(MainClass game, World nWorld) {
+        super(new TextureRegion(game.getTextureHandler().getTexture("Duck"), 256, 256), nWorld);
 
         //use texture region to create the duck actor
         scale = (Gdx.graphics.getWidth() / 15) / getWidth();
@@ -30,8 +31,9 @@ public class Duck extends Image {
     }
 
     //sends a duck at a position from one point to another point
-    public static Duck sendDuck(float startX, float startY, float endX, float endY, float speed, MainClass game) {
-        Duck duck = new Duck(game);
+    public static Duck sendDuck(float startX, float startY, float endX, float endY, float speed, MainClass game, World world) {
+        Duck duck = new Duck(game, world);
+        duck.setBody();
 
         //start the duck at the original location
         if(startX <= 0) {

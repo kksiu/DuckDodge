@@ -25,7 +25,7 @@ public class PlayAttack extends State {
         super(sm);
 
         //initialize the duck
-        centerDuck = new Duck(game);
+        centerDuck = new Duck(game, null);
 
         //center the duck
         centerDuck.setCenterPosition(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
