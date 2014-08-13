@@ -8,20 +8,20 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
-
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.Timer;
 import com.basetwelve.entities.CircleControl;
 import com.basetwelve.entities.Dodger;
 import com.basetwelve.entities.Duck;
 import com.basetwelve.handlers.PlayCollisionHandler;
 import com.basetwelve.handlers.StateManager;
-import com.badlogic.gdx.utils.Timer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 
 /**

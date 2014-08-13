@@ -1,6 +1,5 @@
 package com.basetwelve.handlers;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.basetwelve.MainClass;
 import com.basetwelve.state.MainMenu;
 import com.basetwelve.state.PlayAttack;

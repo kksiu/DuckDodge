@@ -1,8 +1,8 @@
 package com.basetwelve.state;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.basetwelve.handlers.StateManager;
 import com.basetwelve.MainClass;
+import com.basetwelve.handlers.StateManager;
 
 /**
  * Created by Kenneth on 8/10/14.

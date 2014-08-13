@@ -1,8 +1,7 @@
 package com.basetwelve.entities;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * Created by Kenneth on 8/11/14.
