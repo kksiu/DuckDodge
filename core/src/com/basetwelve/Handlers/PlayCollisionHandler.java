@@ -60,8 +60,16 @@ public class PlayCollisionHandler implements ContactListener{
             actorsToRemoveFromBullet.add(actor1);
             actorsToRemoveFromBullet.add(actor2);
 
+            Box2DActor actor;
+
+            if(!actor1.getClass().equals(Bullet.class)) {
+                actor = actor1;
+            } else {
+                actor = actor2;
+            }
+
             //set the explosion
-            pointsToExplodeFromBullet.add(contact.getWorldManifold().getPoints()[0]);
+            pointsToExplodeFromBullet.add(new Vector2(actor.getCenterX(), actor.getCenterY()));
         }
     }
 

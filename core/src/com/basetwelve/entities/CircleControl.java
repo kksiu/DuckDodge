@@ -28,7 +28,7 @@ public class CircleControl extends Image {
         circleHypotenuse = 0;
 
         //set padding
-        padding = nPadding;
+        padding = nPadding * 2;
 
         pointerID = -1;
 

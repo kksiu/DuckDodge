@@ -271,7 +271,8 @@ public class PlayDodge extends State {
 
         //move actor based off of the keys pressed
         if(controlMove.circleActivated) {
-            if( (controlMove.circleHypotenuse >= (controlMove.getWidth() / 6)) ) {
+            if( (controlMove.circleHypotenuse >= (controlMove.getWidth() / 6)) &&
+                    (controlMove.circleHypotenuse <= ((controlMove.getWidth() / 2) + controlMove.padding)) ) {
                 //use angle to determine movement
                 float move = dt * movementSpeed;
 
