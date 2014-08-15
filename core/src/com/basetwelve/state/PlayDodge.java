@@ -11,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
@@ -60,6 +62,7 @@ public class PlayDodge extends State {
 
     //movement keys
     private boolean moveLeftKey, moveRightKey, moveUpKey, moveDownKey;
+    private boolean shootLeft, shootRight, shootUp, shootDown;
 
     //movement speed
     private float movementSpeed = Gdx.graphics.getWidth() / 5;
@@ -114,6 +117,12 @@ public class PlayDodge extends State {
         moveRightKey = false;
         moveUpKey = false;
         moveDownKey = false;
+
+        //shoot keys
+        shootLeft = false;
+        shootRight = false;
+        shootUp = false;
+        shootDown = false;
 
         //make a texture region based off of a person
         TextureRegion texReg = new TextureRegion(game.getTextureHandler().getTexture("Player"), 17, 21);
@@ -177,10 +186,6 @@ public class PlayDodge extends State {
                     controlShoot.getListeners().get(0).handle(event);
                     controlShoot.pointerID = pointer;
 
-                    //shooting timer
-                    shootTimer = new Timer();
-                    shootTimer.scheduleTask(shootTask, 0.0f, shootRepeat);
-
                     stage.addActor(controlShoot);
                 }
 
@@ -190,15 +195,11 @@ public class PlayDodge extends State {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 if(controlMove.pointerID == pointer) {
-                    controlMove.pointerID = -1;
                     controlMove.remove();
                     controlMove.getListeners().get(0).handle(event);
                 }
 
                 if (controlShoot.pointerID == pointer) {
-                    shootTimer.stop();
-                    shootTask.cancel();
-                    controlShoot.pointerID = -1;
                     controlShoot.remove();
                     controlShoot.getListeners().get(0).handle(event);
                 }
@@ -237,6 +238,11 @@ public class PlayDodge extends State {
                 sendBullet();
             }
         };
+
+        //shooting timer
+        shootTimer = new Timer();
+        shootTimer.scheduleTask(shootTask, 0.0f, shootRepeat);
+
     }
 
     @Override
@@ -271,8 +277,7 @@ public class PlayDodge extends State {
 
         //move actor based off of the keys pressed
         if(controlMove.circleActivated) {
-            if( (controlMove.circleHypotenuse >= (controlMove.getWidth() / 6)) &&
-                    (controlMove.circleHypotenuse <= ((controlMove.getWidth() / 2) + controlMove.padding)) ) {
+            if( (controlMove.circleHypotenuse >= (controlMove.getWidth() / 6)) ) {
                 //use angle to determine movement
                 float move = dt * movementSpeed;
 
@@ -340,6 +345,14 @@ public class PlayDodge extends State {
             moveDownKey = pressDown;
         } else if(keycode == Input.Keys.D) {
             moveRightKey = pressDown;
+        } else if(keycode == Input.Keys.UP) {
+            shootUp = pressDown;
+        } else if(keycode == Input.Keys.LEFT) {
+            shootLeft = pressDown;
+        } else if(keycode == Input.Keys.DOWN) {
+            shootDown = pressDown;
+        } else if(keycode == Input.Keys.RIGHT) {
+            shootRight = pressDown;
         }
     }
 
@@ -441,6 +454,48 @@ public class PlayDodge extends State {
 
             //add to bullet list
             bulletList.add(nBullet);
+        } //check the keys to see if one can shoot from there
+        else {
+            //shoot bullet if keys pressed
+            if(shootUp || shootRight || shootDown || shootLeft) {
+                Texture bTexture = game.getTextureHandler().getTexture("Bullet");
+                Bullet nBullet = new Bullet(new TextureRegion(bTexture, bTexture.getWidth(), bTexture.getHeight()), world);
+                float scaling = 1/4f;
+                nBullet.setWidth(scaling * nBullet.getWidth());
+                nBullet.setHeight(scaling * nBullet.getHeight());
+                nBullet.setScaling(Scaling.fill);
+                nBullet.setBody(BULLET_ACTOR, DUCK_ACTOR);
+
+                float angle = 0f;
+
+                //see where it should go
+                if(shootUp || shootDown) {
+                    if(shootRight) {
+                        angle = 45;
+                    } else if(shootLeft) {
+                        angle = 135;
+                    } else {
+                        angle = 90;
+                    }
+                } else {
+                    if(shootLeft) {
+                        angle = 180;
+                    }
+                }
+
+                //reversse sign if actually shooting down
+                if(shootDown) {
+                    angle *= -1;
+                }
+
+                nBullet.sendActorAngle(angle, playerDodge, shootSpeed);
+
+                //add to stage
+                stage.addActor(nBullet);
+
+                //add to bullet list
+                bulletList.add(nBullet);
+            }
         }
     }
 

@@ -52,6 +52,7 @@ public class CircleControl extends Image {
                 circleActivated = false;
                 circleAngle = 0;
                 circleHypotenuse = 0;
+                pointerID = -1;
             }
         });
     }
