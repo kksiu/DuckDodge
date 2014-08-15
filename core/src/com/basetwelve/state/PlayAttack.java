@@ -2,13 +2,14 @@ package com.basetwelve.state;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
+import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.basetwelve.entities.Duck;
 import com.basetwelve.handlers.StateManager;
 
-import java.util.Random;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.repeat;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.rotateBy;
 
 /**
  * Created by Kenneth on 8/11/14.
@@ -42,37 +43,8 @@ public class PlayAttack extends State {
 
                 angle = (float)Math.toDegrees(angle);
 
-                float height;
-                float width;
-
-                //figure out the screen corner angles
-                float sAngle = (float) Math.toDegrees(Math.atan2(Gdx.graphics.getHeight() / 2, Gdx.graphics.getWidth() / 2));
-                float bAngle = (float) Math.toDegrees(Math.atan2(Gdx.graphics.getHeight() / 2, -Gdx.graphics.getWidth() / 2));
-
-                //figure out the angles to move the duck
-                if((Math.abs(angle) < sAngle) || (Math.abs(angle) > bAngle)) {
-                    width = (stage.getWidth() / 2) + (centerDuck.getWidth() / 2);
-
-                    if(Math.abs(angle) > 90) {
-                        width *= -1;
-                    }
-
-                    height = (float) Math.tan(Math.toRadians(angle)) * width;
-
-                } else {
-                    height = (stage.getHeight() / 2) + (centerDuck.getHeight() / 2);
-
-                    if(angle < 0) {
-                        height *= -1;
-                    }
-
-                    width = height / (float) Math.tan(Math.toRadians(angle));
-                }
-
-                float duration = 2.0f;
-                centerDuck.addAction(parallel(moveTo(width + centerDuck.getX(), height + centerDuck.getY(), duration),
-                        rotateBy((new Random()).nextBoolean() ? 360f : -360f, duration)));
-
+                ParallelAction pAction = centerDuck.sendActorAngle(angle, centerDuck, 300f);
+                pAction.addAction(repeat(RepeatAction.FOREVER, rotateBy(360, 1.0f)));
             }
         });
 

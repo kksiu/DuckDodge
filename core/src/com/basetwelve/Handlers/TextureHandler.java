@@ -44,5 +44,6 @@ public class TextureHandler {
         loadTexture("images/duck_stock.png", "Duck");
         loadTexture("images/player_stock.png", "Player");
         loadTexture("images/circle_control.png", "CircleControl");
+        loadTexture("images/circle_bullet.png", "Bullet");
     }
 }

@@ -32,8 +32,8 @@ public class Dodger extends Box2DActor {
         return health;
     }
 
-    public void setScore(int nScore) {
-        score = nScore;
+    public void addScore(int nScore) {
+        score += nScore;
     }
 
     public void setHealth(int nHealth) {

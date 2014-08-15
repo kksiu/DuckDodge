@@ -1,0 +1,111 @@
+
+explosion.png
+size: 784,196
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+000
+  rotate: false
+  xy: 2, 100
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+001
+  rotate: false
+  xy: 2, 2
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+002
+  rotate: false
+  xy: 100, 100
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+003
+  rotate: false
+  xy: 100, 2
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+004
+  rotate: false
+  xy: 198, 100
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+005
+  rotate: false
+  xy: 198, 2
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+006
+  rotate: false
+  xy: 296, 100
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+007
+  rotate: false
+  xy: 296, 2
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+008
+  rotate: false
+  xy: 394, 100
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+009
+  rotate: false
+  xy: 394, 2
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+010
+  rotate: false
+  xy: 492, 100
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+011
+  rotate: false
+  xy: 492, 2
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+012
+  rotate: false
+  xy: 590, 100
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+013
+  rotate: false
+  xy: 590, 2
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
+014
+  rotate: false
+  xy: 688, 100
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1
