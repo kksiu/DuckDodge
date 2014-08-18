@@ -25,6 +25,7 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        maven { url "https://clojars.org/repo/"}
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
@@ -58,7 +59,7 @@ project(":server") {
         compile "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-desktop:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
-        compile files("../external/kryonet-2.21-all.jar")
+        compile "kryonet:kryonet-all:2.21"
     }
 }
 
