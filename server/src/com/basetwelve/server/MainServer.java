@@ -8,7 +8,6 @@ import com.esotericsoftware.kryonet.Server;
 public class MainServer {
 
     public static void main(String[] args) {
-        System.out.println("WERF");
         Server server = new Server();
         server.start();
 
@@ -17,6 +16,5 @@ public class MainServer {
         } catch(Exception e) {
             System.out.println(e.toString());
         }
-        
     }
 }

@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -47,7 +49,7 @@ public class PlayDodge extends State {
 
     //shooting timer
     private Timer shootTimer;
-    private float shootRepeat = 0.05f;
+    private float shootRepeat = 0.20f;
     private float shootSpeed = 300f;
     private Timer.Task shootTask;
 
@@ -86,19 +88,16 @@ public class PlayDodge extends State {
     //need a list of explosions
     List<AnimatedBox2dDActor> explosionList;
 
+    //score and health titles
+    BitmapFont font;
+    String healthStr;
+    String scoreStr;
+
     public PlayDodge(StateManager sm) {
         super(sm);
 
         //add the shooting texture atlas
         shootAtlas =  new TextureAtlas(Gdx.files.internal("images/explosion/explosion.atlas"));
-
-        //create collision handler
-        colHandler = new PlayCollisionHandler();
-
-        //create box2D world (don't need physics)
-        world = new World(new Vector2(0, 0), true);
-        world.setContactListener(colHandler);
-        b2dr = new Box2DDebugRenderer();
 
         //initialize random
         rand = new Random();
@@ -123,6 +122,14 @@ public class PlayDodge extends State {
         shootRight = false;
         shootUp = false;
         shootDown = false;
+
+        //create collision handler
+        colHandler = new PlayCollisionHandler();
+
+        //create box2D world (don't need physics)
+        world = new World(new Vector2(0, 0), true);
+        world.setContactListener(colHandler);
+        b2dr = new Box2DDebugRenderer();
 
         //make a texture region based off of a person
         TextureRegion texReg = new TextureRegion(game.getTextureHandler().getTexture("Player"), 17, 21);
@@ -243,6 +250,11 @@ public class PlayDodge extends State {
         shootTimer = new Timer();
         shootTimer.scheduleTask(shootTask, 0.0f, shootRepeat);
 
+        //show the score and health
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Kenney_Pixel.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = Gdx.graphics.getHeight() / 30;
+        font = generator.generateFont(parameter);
     }
 
     @Override
@@ -269,6 +281,7 @@ public class PlayDodge extends State {
         removeActors(colHandler.getActorsToRemoveFromBullet());
 
         //add the explosions
+        playerDodge.removeHealth(colHandler.getPointsToExplodeFromDodger().size());
         removePointsAndAddExplosion(colHandler.getPointsToExplodeFromDodger());
 
         //add points before showing the points to explode
@@ -286,20 +299,33 @@ public class PlayDodge extends State {
             }
         } else {
             if(moveUpKey) {
-                playerDodge.addAction(parallel(moveBy(0, dt * movementSpeed)));
+                playerDodge.moveBy(0, dt * movementSpeed);
             }
 
             if(moveLeftKey) {
-                playerDodge.addAction(parallel(moveBy(-dt * movementSpeed, 0)));
+                playerDodge.moveBy(-dt * movementSpeed, 0);
             }
 
             if(moveDownKey) {
-                playerDodge.addAction(parallel(moveBy(0, -dt * movementSpeed)));
+                playerDodge.moveBy(0, -dt * movementSpeed);
             }
 
             if(moveRightKey) {
-                playerDodge.addAction(parallel(moveBy(dt * movementSpeed, 0)));
+                playerDodge.moveBy(dt * movementSpeed, 0);
             }
+        }
+
+        //check player is on the edge of the stage
+        if(playerDodge.getX() <= 0) {
+            playerDodge.setX(0);
+        } else if(playerDodge.getWidth() + playerDodge.getX() >= stage.getWidth()) {
+            playerDodge.setX(stage.getWidth() - playerDodge.getWidth());
+        }
+
+        if(playerDodge.getY() <= 0) {
+            playerDodge.setY(0);
+        } else if(playerDodge.getHeight() + playerDodge.getY() >= stage.getHeight()) {
+            playerDodge.setY(stage.getHeight() - playerDodge.getHeight());
         }
 
         //get all the duck lists
@@ -321,6 +347,14 @@ public class PlayDodge extends State {
         //have the stage act
         world.step(dt, 6, 2);
         stage.act(dt);
+
+        healthStr = "Health: " + playerDodge.getHealth();
+        scoreStr = "Score: " + playerDodge.getScore();
+
+        //end game
+        if(playerDodge.getHealth() <= 0) {
+
+        }
     }
 
     @Override
@@ -328,6 +362,14 @@ public class PlayDodge extends State {
         stage.draw();
 
         b2dr.render(world, stage.getCamera().combined);
+
+        stage.getBatch().begin();
+        font.draw(stage.getBatch(), scoreStr, circlePadding,
+                font.getBounds(scoreStr).height + circlePadding);
+        font.draw(stage.getBatch(), healthStr,
+                Gdx.graphics.getWidth() - circlePadding - font.getBounds(healthStr).width,
+                font.getBounds(healthStr).height + circlePadding);
+        stage.getBatch().end();
     }
 
     @Override

@@ -21,12 +21,17 @@ public class PlayCollisionHandler implements ContactListener{
     List<Vector2> pointsToExplodeFromDodger;
     List<Vector2> pointsToExplodeFromBullet;
 
+    //fixes the first time the dodger is contacted
+    boolean firstContact;
+
     public PlayCollisionHandler() {
         super();
         actorsToRemoveFromDodger = new ArrayList<Box2DActor>();
         actorsToRemoveFromBullet = new ArrayList<Box2DActor>();
         pointsToExplodeFromDodger = new ArrayList<Vector2>();
         pointsToExplodeFromBullet = new ArrayList<Vector2>();
+
+        firstContact = true;
     }
 
     @Override
@@ -36,8 +41,15 @@ public class PlayCollisionHandler implements ContactListener{
         Box2DActor actor2 = (Box2DActor) contact.getFixtureB().getUserData();
 
         //make sure that the bodies is not the player
-        if( actor1.getClass().equals(Dodger.class)
-                || actor2.getClass().equals(Dodger.class) ) {
+        if((actor1.getClass().equals(Dodger.class)
+                || actor2.getClass().equals(Dodger.class)) ) {
+
+            //make sure to set first contact back to false once the first time the player
+            //incorrectly is in contact with the first duck
+            if(firstContact) {
+                firstContact = false;
+                return;
+            }
 
             Box2DActor actor;
 
