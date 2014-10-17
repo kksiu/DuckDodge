@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.utils.Array;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
@@ -17,14 +18,30 @@ public class Box2DActor extends Image {
     //box2D container
     private Body body;
     private World world;
+    double center;
 
     //constructor
     protected Box2DActor(TextureRegion region, World nWorld) {
         super(region);
 
+        //set the center of the image
+
+
         if(nWorld != null) {
             world = nWorld;
         }
+    }
+
+    public void setCenterPosition(float x, float y) {
+        this.setPosition(x, y, Align.center);
+    }
+
+    public float getCenterX() {
+        return this.getX(Align.center);
+    }
+
+    public float getCenterY() {
+        return this.getY(Align.center);
     }
 
     //set the body

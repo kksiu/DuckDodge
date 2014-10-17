@@ -61,6 +61,3 @@ build/
 
 ## OS Specific
 .DS_Store
-
-## External Jars
-external/

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -56,6 +57,11 @@ public class CircleControl extends Image {
             }
         });
     }
+
+    public void setCenterPosition(float x, float y) {
+        this.setPosition(x, y, Align.center);
+    }
+
 
     //hit detection is now a circle
     @Override
